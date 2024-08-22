@@ -112,7 +112,7 @@ export default function RootLayout({
           <MenuProvider>
             <section className="flex px-4 min-h-screen flex-col">
               <Header />
-              <div className="overflow-hidden  flex-col flex rounded-xl">
+              <div className="overflow-hidden  bg-yellow-200 grow flex-col flex rounded-xl">
                 <DropdownMenu />
                 <Main>{children}</Main>
               </div>
