@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 
-const hygraphEndpoint = process.env.NEXT_PUBLIC_HYGRAPH_ENDPOINT;
+const hygraphEndpoint = process.env.NEXT_HYGRAPH_ENDPOINT;
 const hygraphToken = process.env.HYGRAPH_MUTATION_TOKEN;
 
 if (!hygraphEndpoint) {
