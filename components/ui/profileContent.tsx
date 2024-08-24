@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client';
 
 import { motion } from 'framer-motion';
@@ -24,7 +26,7 @@ interface ProfileContentProps {
     };
     preference: string;
     bookings: any[];
-  };
+  } | null;
   error?: boolean;
 }
 
@@ -67,14 +69,16 @@ export default function ProfileContent({
         <div className="flex items-center space-x-4">
           <Avatar className="h-20 w-20">
             <AvatarImage
-              src={lodger.profileImage?.url || user.profileImageUrl}
-              alt={lodger.name}
+              src={lodger?.profileImage?.url ?? user.profileImageUrl}
+              alt={lodger?.name ?? user.name}
             />
-            <AvatarFallback>{lodger.name.charAt(0)}</AvatarFallback>
+            <AvatarFallback>
+              {lodger?.name.charAt(0) ?? user.name.charAt(0)}
+            </AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="text-3xl font-bold">{lodger.name}</h1>
-            <p className="text-gray-500">{lodger.email}</p>
+            <h1 className="text-3xl font-bold">{lodger?.name ?? user.name}</h1>
+            <p className="text-gray-500">{lodger?.email ?? user.email}</p>
           </div>
         </div>
         <Button asChild>
@@ -89,16 +93,16 @@ export default function ProfileContent({
           </CardHeader>
           <CardContent>
             <p>
-              <strong>Email:</strong> {lodger.email}
+              <strong>Email:</strong> {lodger?.email ?? user.email}
             </p>
             <p>
-              <strong>Name:</strong> {lodger.name}
+              <strong>Name:</strong> {lodger?.name ?? user.name}
             </p>
             <p>
-              <strong>Phone:</strong> {lodger.phoneNumber}
+              <strong>Phone:</strong> {lodger?.phoneNumber ?? ''}
             </p>
             <p>
-              <strong>Preferences:</strong> {lodger.preference}
+              <strong>Preferences:</strong> {lodger?.preference ?? ''}
             </p>
           </CardContent>
         </Card>
@@ -108,7 +112,7 @@ export default function ProfileContent({
           </CardHeader>
           <CardContent>
             <p>
-              <strong>Total Bookings:</strong> {lodger.bookings.length}
+              <strong>Total Bookings:</strong> {lodger?.bookings.length ?? 0}
             </p>
             {/* Add more booking-related information here */}
           </CardContent>
@@ -118,7 +122,7 @@ export default function ProfileContent({
             <CardTitle>Recent Bookings</CardTitle>
           </CardHeader>
           <CardContent>
-            {lodger.bookings.slice(0, 3).map((booking, index) => (
+            {lodger?.bookings.slice(0, 3).map((booking, index) => (
               <div key={index} className="mb-2">
                 <p>
                   <strong>Booking {index + 1}:</strong>{' '}
