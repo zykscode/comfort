@@ -1,18 +1,38 @@
-'use client'
+'use client';
 
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface ProfileContentProps {
-  user?: any;
-  lodger?: any;
+  user: {
+    id: string;
+    email: string;
+    name: string;
+    profileImageUrl: string;
+  };
+  lodger: {
+    clerkId: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    profileImage: {
+      url: string;
+    };
+    preference: string;
+    bookings: any[];
+  };
   error?: boolean;
 }
 
-export default function ProfileContent({ user, lodger, error }: ProfileContentProps) {
+export default function ProfileContent({
+  user,
+  lodger,
+  error,
+}: ProfileContentProps) {
   if (error) {
     return (
       <motion.div
@@ -46,7 +66,10 @@ export default function ProfileContent({ user, lodger, error }: ProfileContentPr
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center space-x-4">
           <Avatar className="h-20 w-20">
-            <AvatarImage src={user.profileImageUrl} alt={lodger.name} />
+            <AvatarImage
+              src={lodger.profileImage?.url || user.profileImageUrl}
+              alt={lodger.name}
+            />
             <AvatarFallback>{lodger.name.charAt(0)}</AvatarFallback>
           </Avatar>
           <div>
@@ -65,9 +88,18 @@ export default function ProfileContent({ user, lodger, error }: ProfileContentPr
             <CardTitle>Profile Information</CardTitle>
           </CardHeader>
           <CardContent>
-            <p><strong>Email:</strong> {lodger.email}</p>
-            <p><strong>Name:</strong> {lodger.name}</p>
-            {/* Add more profile information here */}
+            <p>
+              <strong>Email:</strong> {lodger.email}
+            </p>
+            <p>
+              <strong>Name:</strong> {lodger.name}
+            </p>
+            <p>
+              <strong>Phone:</strong> {lodger.phoneNumber}
+            </p>
+            <p>
+              <strong>Preferences:</strong> {lodger.preference}
+            </p>
           </CardContent>
         </Card>
         <Card>
@@ -75,19 +107,25 @@ export default function ProfileContent({ user, lodger, error }: ProfileContentPr
             <CardTitle>Booking Summary</CardTitle>
           </CardHeader>
           <CardContent>
-            <p><strong>Total Bookings:</strong> 0</p>
-            <p><strong>Upcoming Stays:</strong> 0</p>
+            <p>
+              <strong>Total Bookings:</strong> {lodger.bookings.length}
+            </p>
             {/* Add more booking-related information here */}
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Rewards</CardTitle>
+            <CardTitle>Recent Bookings</CardTitle>
           </CardHeader>
           <CardContent>
-            <p><strong>Points:</strong> 0</p>
-            <p><strong>Member Since:</strong> {new Date().getFullYear()}</p>
-            {/* Add more rewards-related information here */}
+            {lodger.bookings.slice(0, 3).map((booking, index) => (
+              <div key={index} className="mb-2">
+                <p>
+                  <strong>Booking {index + 1}:</strong>{' '}
+                  {/* Add booking details here */}
+                </p>
+              </div>
+            ))}
           </CardContent>
         </Card>
       </div>

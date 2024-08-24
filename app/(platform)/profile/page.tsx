@@ -12,15 +12,30 @@ export default async function ProfilePage() {
   }
 
   try {
-    const clerkId = user.id;
-    const email = user.emailAddresses[0]?.emailAddress || '';
-    const name = `${user.firstName} ${user.lastName}`.trim();
+    const userData = {
+      id: user.id,
+      email: user.emailAddresses[0]?.emailAddress || '',
+      name: `${user.firstName} ${user.lastName}`.trim(),
+      profileImageUrl: user.imageUrl,
+    };
 
-    const lodger = await getUserByClerkId(clerkId, email, name);
+    const lodger = await getUserByClerkId(
+      user.id,
+      userData.email,
+      userData.name,
+    );
 
-    return <ProfileContent user={user} lodger={lodger} />;
+    const lodgerData = {
+      ...lodger,
+      phoneNumber: lodger.phoneNumber || '',
+      profileImage: { url: lodger.profileImageUrl || '' },
+      preference: lodger.preference || '',
+      bookings: lodger.bookings || [],
+    };
+
+    return <ProfileContent user={userData} lodger={lodgerData} />;
   } catch (error) {
     console.error('Error fetching or creating user profile:', error);
-    return <ProfileContent error={true} />;
+    return <ProfileContent user={{} as any} lodger={{} as any} error={true} />;
   }
 }
