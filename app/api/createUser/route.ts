@@ -17,17 +17,17 @@ interface CreateLodgerResponse {
   };
 }
 
-export async function POST(req: NextRequest) {
-  const { email, name, clerkId } = await req.json();
-
-  if (!email || !name || !clerkId) {
-    return NextResponse.json(
-      { error: 'Missing required fields' },
-      { status: 400 },
-    );
-  }
-
+export async function POST(request: NextRequest) {
   try {
+    const { email, name, clerkId } = await request.json();
+
+    if (!email || !name || !clerkId) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 },
+      );
+    }
+
     const result = await client.request<CreateLodgerResponse>(
       gql`
         mutation CreateUser(
@@ -51,17 +51,24 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(result.createLodger, { status: 201 });
   } catch (error) {
     console.error('Error in createUser:', error);
+    let errorMessage = 'Internal Server Error';
+    let errorDetails = {};
+
     if (error.response) {
       console.error(
         'GraphQL response:',
         JSON.stringify(error.response, null, 2),
       );
+      errorMessage =
+        error.response.errors?.[0]?.message || 'Unknown GraphQL error';
+      errorDetails = error.response.errors?.[0] || {};
     }
     if (error.request) {
       console.error('GraphQL request:', JSON.stringify(error.request, null, 2));
     }
+
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: errorMessage, details: errorDetails },
       { status: 500 },
     );
   }
