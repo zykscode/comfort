@@ -22,7 +22,7 @@ const Header = () => {
     >
       <Link
         href="/profile"
-        className="md:hidden flex bg-yellow-400 self-center items-center h-8 w-8 rounded-full"
+        className="md:hidden justify-center flex bg-yellow-400 self-center items-center h-8 w-8 rounded-full"
       >
         {isSignedIn ? (
           <UserButton
