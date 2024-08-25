@@ -2,11 +2,11 @@
 
 import { UserButton, useUser } from '@clerk/nextjs';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import { useMenu } from './MenuContext';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import Breadcrumbs from './ui/breadcrumbs';
 import { MenuToggle } from './ui/menuToggle';
 import Navs from './ui/navs';
@@ -25,13 +25,13 @@ const Header = () => {
           {isSignedIn ? (
             <UserButton />
           ) : (
-            <Image
-              src="/images/generic-avatar.png"
-              alt="Generic Avatar"
-              width={32}
-              height={32}
-              className="rounded-full"
-            />
+            <Avatar>
+              <AvatarImage
+                src="/images/generic-avatar.png"
+                alt="Generic Avatar"
+              />
+              <AvatarFallback>GA</AvatarFallback>
+            </Avatar>
           )}
         </Link>
       </div>
