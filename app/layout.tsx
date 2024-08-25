@@ -1,5 +1,6 @@
 import '@/css/globals.css';
 
+import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 
 import { Footer } from '@/components/footer';
@@ -108,18 +109,20 @@ export default function RootLayout({
       />
 
       <body className={`min-h-screen`}>
-        <ThemeProvider>
-          <MenuProvider>
-            <section className="flex px-4 min-h-screen flex-col">
-              <Header />
-              <div className="overflow-hidden h-full rounded-xl">
-                <DropdownMenu />
-                <Main>{children}</Main>
-              </div>
-              <Footer />
-            </section>
-          </MenuProvider>
-        </ThemeProvider>
+        <ClerkProvider>
+          <ThemeProvider>
+            <MenuProvider>
+              <section className="flex px-4 min-h-screen flex-col">
+                <Header />
+                <div className="overflow-hidden h-full rounded-xl">
+                  <DropdownMenu />
+                  <Main>{children}</Main>
+                </div>
+                <Footer />
+              </section>
+            </MenuProvider>
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

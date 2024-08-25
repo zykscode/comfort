@@ -8,9 +8,7 @@ const Breadcrumbs = () => {
     <Link href={'/'} className="flex items-center h-12 w-12 cursor-pointer">
       <div className="flex items-center active cursor-pointer">
         <PageLogo />
-        <span className="hidden md:flex ml-2 cursor-pointer ">
-          Zyk.vercel.app
-        </span>
+        <span className="flex ml-2 cursor-pointer ">Comforte</span>
       </div>
     </Link>
   );

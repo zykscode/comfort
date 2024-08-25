@@ -4,18 +4,16 @@ import React from 'react';
 
 import { navs } from '@/data/headerNavLinks';
 
-import { MenuToggle } from './menuToggle';
 import NavLink from './nav-links';
 
-const Navs = ({ toggle }: { toggle: () => void }) => {
+const Navs = () => {
   return (
-    <nav className="text-md uppercase w-1/2 justify-between flex">
+    <nav className="text-md hidden md:flex uppercase w-1/2 justify-between">
       <div className="flex w-full justify-evenly">
         {navs.map((nav, i) => {
           return <NavLink text={nav} i={i} key={nav} />;
         })}
       </div>
-      <MenuToggle toggle={toggle} />
     </nav>
   );
 };
