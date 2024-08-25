@@ -5,7 +5,7 @@ import Me from '@/public/64.png';
 
 function PageLogo() {
   return (
-    <div className="size-9 md:size-12 rounded-full bg-green-200 cursor-pointer ">
+    <div className="size-8 md:size-12 rounded-full cursor-pointer ">
       <Image
         alt="page logo logo"
         src={Me}
