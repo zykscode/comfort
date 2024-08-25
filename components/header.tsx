@@ -35,6 +35,7 @@ const Header = () => {
           )}
         </Link>
       </div>
+
       <Breadcrumbs />
 
       <Navs />
