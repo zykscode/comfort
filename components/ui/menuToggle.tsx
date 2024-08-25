@@ -23,7 +23,7 @@ const scrollToTopAndToggle = (toggle: () => void) => {
 export const MenuToggle = ({ toggle }: { toggle: () => void }) => (
   <button
     onClick={() => scrollToTopAndToggle(toggle)}
-    className="w-16 md:w-20 flex justify-center items-center bg-transparent rounded-full focus:outline-none"
+    className="w-12 md:w-20 flex justify-center items-center bg-transparent rounded-full focus:outline-none"
   >
     <span className="sr-only "> menu toggle button </span>
     <svg className="w-full" viewBox="0 0 48 48">
