@@ -18,12 +18,18 @@ const Header = () => {
     <motion.header
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
-      className="flex justify-between items-center h-18 md:h-20 sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm"
+      className="flex justify-between items-center h-18 md:h-20 sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 py-2 backdrop-blur-sm"
     >
       <div className="md:hidden h-8 w-8 rounded-full">
         <Link href="/profile">
           {isSignedIn ? (
-            <UserButton />
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarImage: 'h-full w-full',
+                },
+              }}
+            />
           ) : (
             <Avatar>
               <AvatarImage
