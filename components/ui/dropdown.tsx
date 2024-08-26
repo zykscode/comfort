@@ -105,7 +105,7 @@ const DropdownMenu = () => {
 
   return (
     <motion.div
-      className="bg-[#121011] text-slate-100 text-4xl md:text-7xl capitalize flex-grow overflow-hidden"
+      className="bg-foreground text-slate-100 text-4xl md:text-7xl capitalize flex-grow overflow-hidden"
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
       variants={containerVariants}

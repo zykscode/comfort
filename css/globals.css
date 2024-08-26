@@ -4,8 +4,8 @@
 
 @layer base {
   :root {
-    --background: 38 33 32;
-    --foreground: 213 208 202;
+    --background: 33, 12, 81;
+    --foreground: 0 0 8;
     --card: 21 21 21;
     --card-foreground: 213 208 202;
     --popover: 21 21 21;
@@ -56,4 +56,34 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.grid-b {
+  background-color: #2e1c1c0f;
+  width: 97.5%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  inset: 0;
+}
+
+.dot-grid {
+  z-index: 3;
+  opacity: 0.05;
+  background-image: url('/assets/images/dot-grid.png');
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.dot-grid.white {
+  z-index: -1;
+  opacity: 0.4;
+  background-image: url('/assets/images/dot-grid-2.png');
+  background-position: 50% 0;
+  background-repeat: repeat;
+  background-size: contain;
 }

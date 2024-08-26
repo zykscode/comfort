@@ -21,7 +21,7 @@ const Main = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <motion.main
-      className="flex-grow flex flex-col bg-green-50"
+      className="flex-grow flex flex-col"
       initial="closed"
       animate={isOpen ? 'open' : 'closed'}
       variants={variants}
