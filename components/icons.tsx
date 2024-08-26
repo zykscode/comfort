@@ -47,8 +47,8 @@ export const Icons = {
   eko: ({ ...props }: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="311.000000pt"
-      height="102.000000pt"
+      width="1em"
+      height="1em"
       viewBox="0 0 311.000000 102.000000"
       preserveAspectRatio="xMidYMid meet"
       {...props}
@@ -83,8 +83,8 @@ export const Icons = {
   marriot: ({ ...props }: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="241.000000pt"
-      height="180.000000pt"
+      width="1em"
+      height="1em"
       viewBox="0 0 241.000000 180.000000"
       preserveAspectRatio="xMidYMid meet"
       {...props}
