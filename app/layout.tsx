@@ -8,7 +8,6 @@ import Header from '@/components/header';
 import Main from '@/components/main';
 import { MenuProvider } from '@/components/MenuContext';
 import { ThemeProvider } from '@/components/theme-provider';
-import { ThemeToggle } from '@/components/theme-toggle';
 import DropdownMenu from '@/components/ui/dropdown';
 import siteMetadata from '@/data/siteMetadata';
 import { cn, WhyteInktrap } from '@/lib/utils';
@@ -114,9 +113,7 @@ export default function RootLayout({
           <ClerkProvider>
             <MenuProvider>
               <section className="flex px-4 min-h-screen flex-col">
-                <Header>
-                  <ThemeToggle />
-                </Header>
+                <Header />
                 <div className="overflow-hidden h-full rounded-xl">
                   <DropdownMenu />
                   <Main>{children}</Main>
