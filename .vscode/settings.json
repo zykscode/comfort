@@ -11,5 +11,8 @@
     "typescript",
     "typescriptreact"
   ],
-  "files.eol": "\n"
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/node_modules": true
+  }
 }

@@ -112,11 +112,12 @@ export default function RootLayout({
         <ThemeProvider>
           <ClerkProvider>
             <MenuProvider>
-              <section className="flex min-h-screen flex-col  relative z-10">
+              <section className="flex px-4 min-h-screen flex-col  relative z-10">
                 <Header />
-                <div className="overflow-hidden px-4  bg-[#d0cbc5] h-full ">
-                  <div className="dot-grid white"></div>
+                <div className="overflow-hidden bg-[#d0cbc5] h-full rounded-xl">
                   <DropdownMenu />
+                  <div className="dot-grid white"></div>
+
                   <Main>{children}</Main>
                 </div>
                 <Footer />
