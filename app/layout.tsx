@@ -8,6 +8,7 @@ import Header from '@/components/header';
 import Main from '@/components/main';
 import { MenuProvider } from '@/components/MenuContext';
 import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeToggle } from '@/components/theme-toggle';
 import DropdownMenu from '@/components/ui/dropdown';
 import siteMetadata from '@/data/siteMetadata';
 import { cn, WhyteInktrap } from '@/lib/utils';
@@ -108,12 +109,14 @@ export default function RootLayout({
         href={`${basePath}/feed.xml`}
       />
 
-      <body className={`min-h-screen`}>
-        <ClerkProvider>
-          <ThemeProvider>
+      <body className={`min-h-screen bg-background text-foreground`}>
+        <ThemeProvider>
+          <ClerkProvider>
             <MenuProvider>
               <section className="flex px-4 min-h-screen flex-col">
-                <Header />
+                <Header>
+                  <ThemeToggle />
+                </Header>
                 <div className="overflow-hidden h-full rounded-xl">
                   <DropdownMenu />
                   <Main>{children}</Main>
@@ -121,8 +124,8 @@ export default function RootLayout({
                 <Footer />
               </section>
             </MenuProvider>
-          </ThemeProvider>
-        </ClerkProvider>
+          </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
