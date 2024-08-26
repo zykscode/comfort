@@ -108,11 +108,13 @@ export default function RootLayout({
         href={`${basePath}/feed.xml`}
       />
 
-      <body className={`min-h-screen bg-background text-foreground relative`}>
+      <body
+        className={`min-h-screen px-6 bg-background text-foreground relative`}
+      >
         <ThemeProvider>
           <ClerkProvider>
             <MenuProvider>
-              <section className="flex px-4 min-h-screen flex-col  relative z-10">
+              <section className="flex min-h-screen  flex-col  relative z-10">
                 <Header />
                 <div className="overflow-hidden z-[-1]  bg-[#d0cbc5] h-full rounded-xl bg-repeat bg-[url('../public/assets/images/dot-grid-2.png')] bg-contain ">
                   <DropdownMenu />
