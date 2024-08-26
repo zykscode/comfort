@@ -33,12 +33,12 @@ const Header = () => {
             }}
           />
         ) : (
-          <Avatar>
+          <Avatar className="h-full w-full">
             <AvatarImage
               src="/images/generic-avatar.png"
               alt="Generic Avatar"
             />
-            <AvatarFallback>GA</AvatarFallback>
+            <AvatarFallback className="h-full w-full">GA</AvatarFallback>
           </Avatar>
         )}
       </Link>
