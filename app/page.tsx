@@ -1,6 +1,8 @@
 import CTA from '@/components/cta';
 import Features from '@/components/features';
 import Hero from '@/components/hero';
+import { Icons } from '@/components/icons';
+import { ParallaxText } from '@/components/parallax';
 import PropertyCard from '@/components/propertyCard';
 
 const properties = [
@@ -28,6 +30,20 @@ export default function Home() {
         </div>
       </div>
       <CTA />
+      <ParallaxText baseVelocity={3}>
+        <div className="flex h-8 justify-evenly gap-4 pl-36">
+          <Icons.frasier className="h-full fill-primaryFg" />
+          <Icons.eko className="h-full fill-primaryFg " />
+          <Icons.marriot className="h-full" />
+        </div>
+      </ParallaxText>
+      <ParallaxText baseVelocity={-5}>
+        <div className="flex h-8 justify-evenly gap-4 pl-36">
+          <Icons.frasier className="h-full fill-primaryFg" />
+          <Icons.eko className="h-full fill-primaryFg " />
+          <Icons.marriot className="h-full" />
+        </div>
+      </ParallaxText>
     </main>
   );
 }
