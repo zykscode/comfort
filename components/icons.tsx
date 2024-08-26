@@ -46,7 +46,7 @@ export const Icons = {
   pizza: Pizza,
   rh: ({ ...props }: LucideProps) => (
     <svg
-      className="w-[42px] max-w-[42px]"
+      className="w-full h-full"
       viewBox="0 0 42 48"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -73,8 +73,8 @@ export const Icons = {
   fourPoints: ({ ...props }: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="276.000000pt"
-      height="180.000000pt"
+      width="1em"
+      height="1em"
       viewBox="0 0 276.000000 180.000000"
       preserveAspectRatio="xMidYMid meet"
       {...props}

@@ -33,7 +33,7 @@ export default function Home() {
       <ParallaxText baseVelocity={3}>
         <div className="flex h-8 justify-evenly gap-4 pl-36">
           <Icons.fourPoints className="h-full" />
-
+          <Icons.rh className="h-full" />
           <Icons.frasier className="h-full fill-primaryFg" />
           <Icons.eko className="h-full fill-primaryFg " />
           <Icons.marriot className="h-full" />
@@ -48,6 +48,7 @@ export default function Home() {
           <Icons.eko className="h-full fill-primaryFg " />
           <Icons.marriot className="h-full" />
           <Icons.fourPoints className="h-full" />
+          <Icons.rh className="h-full" />
         </div>
       </ParallaxText>
     </main>
