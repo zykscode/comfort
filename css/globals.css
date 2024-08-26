@@ -58,7 +58,6 @@
   }
 }
 
-
 .dot-grid {
   z-index: 3;
   opacity: 0.05;
@@ -68,12 +67,4 @@
   background-size: cover;
   position: absolute;
   inset: 0;
-}
-
-.dot-grid.white {
-  z-index: -1;
-  background-image: url('/assets/images/dot-grid-2.png');
-  background-position: 50% 0;
-  background-repeat: repeat;
-  background-size: contain;
 }

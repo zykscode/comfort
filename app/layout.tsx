@@ -114,10 +114,8 @@ export default function RootLayout({
             <MenuProvider>
               <section className="flex px-4 min-h-screen flex-col  relative z-10">
                 <Header />
-                <div className="overflow-hidden bg-[#d0cbc5] h-full rounded-xl">
+                <div className="overflow-hidden z-[-1]  bg-[#d0cbc5] h-full rounded-xl bg-repeat bg-[url('../public/assets/images/dot-grid-2.png')] bg-contain ">
                   <DropdownMenu />
-                  <div className="dot-grid white"></div>
-
                   <Main>{children}</Main>
                 </div>
                 <Footer />
