@@ -74,6 +74,10 @@ export function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
         <span className="mr-8 block">{children} </span>
         <span className="mr-8 block">{children} </span>
         <span className="mr-8 block">{children} </span>
+        <span className="mr-8 block">{children} </span>
+        <span className="mr-8 block">{children} </span>
+        <span className="mr-8 block">{children} </span>
+        <span className="mr-8 block">{children} </span>
       </motion.div>
     </div>
   );
