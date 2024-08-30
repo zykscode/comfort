@@ -111,7 +111,7 @@ export default function ProfileContent({
           </CardHeader>
           <CardContent>
             <p>
-              <strong>Total Bookings:</strong> {lodger?.bookings.length ?? 0}
+              <strong>Total Bookings:</strong> {lodger?.bookings?.length ?? 0}
             </p>
             {/* Add more booking-related information here */}
           </CardContent>
@@ -121,14 +121,18 @@ export default function ProfileContent({
             <CardTitle>Recent Bookings</CardTitle>
           </CardHeader>
           <CardContent>
-            {lodger?.bookings.slice(0, 3).map((booking, index) => (
-              <div key={index} className="mb-2">
-                <p>
-                  <strong>Booking {index + 1}:</strong>{' '}
-                  {/* Add booking details here */}
-                </p>
-              </div>
-            ))}
+            {lodger?.bookings && lodger.bookings.length > 0 ? (
+              lodger.bookings.slice(0, 3).map((booking, index) => (
+                <div key={index} className="mb-2">
+                  <p>
+                    <strong>Booking {index + 1}:</strong>{' '}
+                    {/* Add booking details here */}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p>No bookings yet.</p>
+            )}
           </CardContent>
         </Card>
       </div>

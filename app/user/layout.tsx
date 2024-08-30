@@ -1,6 +1,10 @@
-import { auth } from '@clerk/nextjs/server';
+'use client';
+
+import { useUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useToast } from '@/components/ui/use-toast';
 
 export default function UserLayout({
   children,
@@ -11,10 +15,30 @@ export default function UserLayout({
   profile: React.ReactNode;
   dashboard: React.ReactNode;
 }) {
-  const { userId } = auth();
+  const { isLoaded, isSignedIn, user } = useUser();
+  const { toast } = useToast();
 
-  if (!userId) {
-    redirect('/sign-in');
+  useEffect(() => {
+    if (isLoaded && !isSignedIn) {
+      toast({
+        title: 'Authentication Required',
+        description: 'Please sign in to access this page.',
+        variant: 'destructive',
+      });
+      redirect('/sign-in');
+    }
+
+    if (isLoaded && isSignedIn && user) {
+      toast({
+        title: 'Welcome',
+        description: `Hello, ${user.firstName || 'User'}! You've successfully logged in.`,
+        variant: 'default',
+      });
+    }
+  }, [isLoaded, isSignedIn, user, toast]);
+
+  if (!isLoaded || !isSignedIn) {
+    return null;
   }
 
   return (

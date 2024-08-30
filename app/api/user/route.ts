@@ -1,18 +1,20 @@
-import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
-export async function GET() {
-  const { userId } = auth(); // Clerk user authentication
+import { prisma } from '@/lib/db';
 
-  if (!userId) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
+export async function POST(req: Request) {
   try {
-    const user = await clerk.users.getUser(userId); // Clerk user info
-    return NextResponse.json(user, { status: 200 });
+    const { id, email, name } = await req.json();
+
+    const user = await prisma.user.upsert({
+      where: { clerkId: id },
+      update: { email, name },
+      create: { clerkId: id, email, name },
+    });
+
+    return NextResponse.json(user);
   } catch (error) {
-    console.error(error);
+    console.error('Error in user API route:', error);
     return NextResponse.json(
       { error: 'Internal Server Error' },
       { status: 500 },

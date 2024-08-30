@@ -1,50 +1,74 @@
-import { currentUser } from '@clerk/nextjs/server';
-import React from 'react';
+'use client';
 
-import { prisma } from '@/lib/db';
+import { useUser } from '@clerk/nextjs';
+import { useEffect, useState } from 'react';
+
+import { useToast } from '@/components/ui/use-toast';
 import { getUserByClerkId } from '@/lib/hygraph';
-export default async function ProfilePage() {
-  const user = await currentUser();
+
+export default function ProfilePage() {
+  const { user } = useUser();
+  const { toast } = useToast();
+  const [lodger, setLodger] = useState(null);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      if (!user) return;
+
+      try {
+        const userData = {
+          id: user.id,
+          email: user.emailAddresses[0]?.emailAddress ?? '',
+          name: `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim(),
+          profileImageUrl: user.imageUrl,
+        };
+
+        // Fetch or create user in the database via API route
+        const response = await fetch('/api/user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch or create user');
+        }
+
+        const dbUser = await response.json();
+
+        // Fetch Hygraph data
+        const hygraphLodger = await getUserByClerkId(
+          user.id,
+          userData.email,
+          userData.name,
+        );
+
+        setLodger({ ...dbUser, ...hygraphLodger });
+
+        toast({
+          title: 'Profile Updated',
+          description: 'Your profile has been successfully updated.',
+          variant: 'default',
+        });
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        toast({
+          title: 'Error',
+          description: 'There was an error updating your profile. Please try again.',
+          variant: 'destructive',
+        });
+      }
+    }
+
+    fetchUserData();
+  }, [user, toast]);
 
   if (!user) {
     return null;
   }
 
-  const userData = {
-    id: user.id,
-    email: user.emailAddresses[0]?.emailAddress ?? '',
-    name: `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim(),
-    profileImageUrl: user.imageUrl,
-  };
-
-  let lodger = await getUserByClerkId(user.id, userData.email, userData.name);
-
-  if (!lodger) {
-    // If the user doesn't exist in Hygraph, create them in Supabase/Prisma
-    lodger = await prisma.user.upsert({
-      where: { clerkId: user.id },
-      update: {},
-      create: {
-        clerkId: user.id,
-        email: userData.email,
-        name: userData.name,
-      },
-    });
-  }
-
-  const lodgerData = lodger
-    ? {
-        clerkId: user.id,
-        name: lodger.name || userData.name,
-        email: lodger.email || userData.email,
-        phoneNumber: lodger.phoneNumber || '',
-        profileImage: {
-          url: lodger.profileImageUrl || userData.profileImageUrl,
-        },
-        preference: lodger.preference || '',
-        bookings: lodger.bookings || [],
-      }
-    : null;
-
-  return <ProfileContent user={userData} lodger={lodgerData} />;
+  // Render your profile content here using the `lodger` state
+  return (
+    // Your JSX here
+  );
 }
