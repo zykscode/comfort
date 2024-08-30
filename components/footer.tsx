@@ -4,7 +4,7 @@ import { ThemeToggle } from './theme-toggle';
 
 export const Footer = () => {
   return (
-    <footer className="">
+    <footer className="mb-0">
       <ThemeToggle />
     </footer>
   );

@@ -30,26 +30,29 @@ export default function Home() {
         </div>
       </div>
       <CTA />
-      <ParallaxText baseVelocity={3}>
-        <div className="flex h-8 justify-evenly gap-4 pl-36">
-          <Icons.fourPoints className="h-full" />
-          <Icons.rh className="h-full" />
-          <Icons.frasier className="h-full " />
-          <Icons.eko className="h-full  " />
-          <Icons.marriot className="h-full" />
-          <Icons.sheraton className="h-full" />
-        </div>
-      </ParallaxText>
-      <ParallaxText baseVelocity={-3}>
-        <div className="flex h-8 justify-evenly gap-4 pl-36">
-          <Icons.sheraton className="h-full" />
-          <Icons.frasier className="h-full " />
-          <Icons.eko className="h-full  " />
-          <Icons.marriot className="h-full" />
-          <Icons.fourPoints className="h-full" />
-          <Icons.rh className="h-full" />
-        </div>
-      </ParallaxText>
+      <div className="flex gap-4 items-center flex-col">
+        <h3 className="text-4xl">Hotels</h3>
+        <ParallaxText baseVelocity={3}>
+          <div className="flex h-8 justify-evenly gap-4 pl-36">
+            <Icons.fourPoints className="h-full" />
+            <Icons.rh className="h-full" />
+            <Icons.frasier className="h-full " />
+            <Icons.eko className="h-full  " />
+            <Icons.marriot className="h-full" />
+            <Icons.sheraton className="h-full" />
+          </div>
+        </ParallaxText>
+        <ParallaxText baseVelocity={-3}>
+          <div className="flex h-8 justify-evenly gap-4 pl-36">
+            <Icons.sheraton className="h-full" />
+            <Icons.frasier className="h-full " />
+            <Icons.eko className="h-full  " />
+            <Icons.marriot className="h-full" />
+            <Icons.fourPoints className="h-full" />
+            <Icons.rh className="h-full" />
+          </div>
+        </ParallaxText>
+      </div>
     </main>
   );
 }

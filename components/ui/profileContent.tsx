@@ -29,7 +29,6 @@ interface ProfileContentProps {
   } | null;
   error?: boolean;
 }
-
 export default function ProfileContent({
   user,
   lodger,

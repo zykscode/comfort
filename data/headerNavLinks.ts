@@ -1,1 +1,1 @@
-export const navs = ['agendas', 'humour', 's&s', 'contact'];
+export const navs = ['hotels', 'bookings', 'explore', 'contact'];
