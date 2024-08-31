@@ -62,20 +62,23 @@ export async function POST(req: Request) {
       profileImageUrl: image_url,
     };
 
+    console.log('Attempting to upsert user with data:', userData);
+
     try {
-      await prisma.user.upsert({
+      const result = await prisma.user.upsert({
         where: { clerkId: id },
         update: userData,
         create: userData,
       });
+      console.log('User upsert result:', result);
       return NextResponse.json(
-        { message: 'User data saved successfully' },
+        { message: 'User data saved successfully', user: result },
         { status: 200 },
       );
     } catch (error) {
       console.error('Error upserting user:', error);
       return NextResponse.json(
-        { error: 'Error saving user data' },
+        { error: 'Error saving user data', details: error.message },
         { status: 500 },
       );
     }

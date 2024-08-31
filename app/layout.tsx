@@ -121,8 +121,8 @@ export default function RootLayout({
                   <DropdownMenu />
                   <Main>{children}</Main>
                 </div>
-                <Footer />
                 <Toaster />
+                <Footer />
               </section>
             </MenuProvider>
           </ClerkProvider>

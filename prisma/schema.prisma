@@ -13,7 +13,7 @@ model User {
   clerkId         String    @unique // Clerk ID is the primary key and unique
   email           String    @unique
   name            String?
-  profileImageUrl String? // Add this line
+  profileImageUrl String? // Make sure this line is present
   bookings        Booking[]
   payments        Payment[]
   createdAt       DateTime  @default(now())
