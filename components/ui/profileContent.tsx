@@ -106,7 +106,7 @@ export default function ProfileContent({
               <strong>Preferences:</strong> {lodger?.preference ?? ''}
             </p>
             <p>
-              <strong>Admin Status:</strong> {user.isAdmin ? 'Admin' : 'User'}S
+              <strong>Admin Status:</strong> {user.isAdmin ? 'Admin' : 'User'}
             </p>
           </CardContent>
         </Card>
