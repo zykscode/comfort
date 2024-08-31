@@ -17,16 +17,19 @@ export async function GET() {
     });
 
     if (!lodger) {
-      // If user doesn't exist in the database, return Clerk user data
-      return NextResponse.json({
-        clerkId: user.id,
-        email: user.emailAddresses[0]?.emailAddress,
-        name: `${user.firstName} ${user.lastName}`.trim(),
-        bookings: [],
+      // If user doesn't exist in the database, create a new one
+      const newUser = await prisma.user.create({
+        data: {
+          clerkId: user.id,
+          email: user.emailAddresses[0]?.emailAddress ?? '',
+          name: `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim(),
+          isAdmin: false,
+        },
       });
+      return NextResponse.json(newUser);
     }
 
-    return NextResponse.json(lodger);
+    return NextResponse.json(user);
   } catch (error) {
     console.error('Error in user API route:', error);
     return NextResponse.json(
