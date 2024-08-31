@@ -4,8 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-import { useToast } from '@/components/ui/use-toast';
-
+import { useToast } from '@/hooks/use-toast';
 export default function UserLayout({
   children,
   profile,

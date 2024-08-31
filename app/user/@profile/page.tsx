@@ -3,7 +3,7 @@
 import { useUser } from '@clerk/nextjs';
 import { useEffect, useState } from 'react';
 
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { getUserByClerkId } from '@/lib/hygraph';
 
 export default function ProfilePage() {
@@ -41,7 +41,8 @@ export default function ProfilePage() {
         console.error('Error fetching user data:', error);
         toast({
           title: 'Error',
-          description: 'There was an error loading your profile. Please try again.',
+          description:
+            'There was an error loading your profile. Please try again.',
           variant: 'destructive',
         });
       }
