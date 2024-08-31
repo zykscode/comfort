@@ -9,18 +9,21 @@ generator client {
 }
 
 model User {
-  clerkId   String    @id @unique // Clerk ID is the primary key and unique
+  id        String    @id @default(uuid())
+  clerkId   String    @unique // Clerk ID is the primary key and unique
   email     String    @unique
   name      String?
   bookings  Booking[]
+  payments  Payment[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  isAdmin   Boolean   @default(false)
 }
 
 model Booking {
   id         Int           @id @default(autoincrement())
-  clerkId    String // Reference to User.clerkId
-  user       User          @relation(fields: [clerkId], references: [clerkId])
+  clerkId    String
+  user       User          @relation(fields: [clerkId], references: [id])
   hotelId    String // Reference to Hygraph Hotel ID
   roomTypeId String // Reference to Hygraph RoomType ID
   checkIn    DateTime
@@ -29,6 +32,8 @@ model Booking {
   payments   Payment[]
   createdAt  DateTime      @default(now())
   updatedAt  DateTime      @updatedAt
+
+  @@index([clerkId])
 }
 
 model Payment {
@@ -39,6 +44,8 @@ model Payment {
   currency          String
   status            PaymentStatus @default(pending)
   paymentProviderId String
+  userId            String
+  user              User          @relation(fields: [userId], references: [id])
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
 }

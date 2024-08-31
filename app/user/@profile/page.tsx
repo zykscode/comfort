@@ -4,33 +4,29 @@ import { useUser } from '@clerk/nextjs';
 import { useEffect, useState } from 'react';
 
 import { useToast } from '@/hooks/use-toast';
-import { getUserByClerkId } from '@/lib/hygraph';
+
+interface Lodger {
+  name: string;
+  email: string;
+}
 
 export default function ProfilePage() {
   const { user } = useUser();
   const { toast } = useToast();
-  const [lodger, setLodger] = useState(null);
+  const [lodger, setLodger] = useState<Lodger | null>(null);
 
   useEffect(() => {
     async function fetchUserData() {
       if (!user) return;
 
       try {
-        const userData = {
-          id: user.id,
-          email: user.emailAddresses[0]?.emailAddress ?? '',
-          name: `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim(),
-          profileImageUrl: user.imageUrl,
-        };
+        const response = await fetch('/api/user/profile');
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+        const data = await response.json();
 
-        // Fetch Hygraph data
-        const hygraphLodger = await getUserByClerkId(
-          user.id,
-          userData.email,
-          userData.name,
-        );
-
-        setLodger({ ...userData, ...hygraphLodger });
+        setLodger(data);
 
         toast({
           title: 'Profile Loaded',
@@ -55,7 +51,6 @@ export default function ProfilePage() {
     return null;
   }
 
-  // Render your profile content here using the `lodger` state
   return (
     <div>
       <h1>Profile</h1>

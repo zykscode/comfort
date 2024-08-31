@@ -35,7 +35,7 @@ const Header = () => {
         ) : (
           <Avatar className="h-full w-full">
             <AvatarImage
-              src="/images/generic-avatar.png"
+              src="https://img.freepik.com/premium-photo/female-user-icon-silhouette-circle-isolated-light-gray-background_1241564-208.jpg?w=826"
               alt="Generic Avatar"
             />
             <AvatarFallback className="h-full w-full">GA</AvatarFallback>

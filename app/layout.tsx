@@ -122,8 +122,8 @@ export default function RootLayout({
                   <Main>{children}</Main>
                 </div>
                 <Footer />
+                <Toaster />
               </section>
-              <Toaster />
             </MenuProvider>
           </ClerkProvider>
         </ThemeProvider>
