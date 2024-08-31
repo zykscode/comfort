@@ -9,15 +9,16 @@ generator client {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  clerkId   String    @unique // Clerk ID is the primary key and unique
-  email     String    @unique
-  name      String?
-  bookings  Booking[]
-  payments  Payment[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  isAdmin   Boolean   @default(false)
+  id              String    @id @default(uuid())
+  clerkId         String    @unique // Clerk ID is the primary key and unique
+  email           String    @unique
+  name            String?
+  profileImageUrl String? // Add this line
+  bookings        Booking[]
+  payments        Payment[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  isAdmin         Boolean   @default(false)
 }
 
 model Booking {

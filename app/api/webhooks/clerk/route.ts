@@ -51,17 +51,15 @@ export async function POST(req: Request) {
   }
 
   // Handle the event
-  const { id } = evt.data;
   const eventType = evt.type;
-  console.log(`Webhook with an ID of ${id} and type of ${eventType}`);
-
   if (eventType === 'user.created' || eventType === 'user.updated') {
     const { id, email_addresses, image_url, first_name, last_name } = evt.data;
 
     const userData = {
       clerkId: id,
-      email: email_addresses?.[0]?.email_address ?? '',
-      name: `${first_name ?? ''} ${last_name ?? ''}`.trim(),
+      email: email_addresses[0]?.email_address,
+      name: `${first_name || ''} ${last_name || ''}`.trim(),
+      profileImageUrl: image_url,
     };
 
     try {
@@ -70,10 +68,16 @@ export async function POST(req: Request) {
         update: userData,
         create: userData,
       });
-      console.log('User data saved successfully');
+      return NextResponse.json(
+        { message: 'User data saved successfully' },
+        { status: 200 },
+      );
     } catch (error) {
       console.error('Error upserting user:', error);
-      return new Response('Error saving user data', { status: 500 });
+      return NextResponse.json(
+        { error: 'Error saving user data' },
+        { status: 500 },
+      );
     }
   }
 
