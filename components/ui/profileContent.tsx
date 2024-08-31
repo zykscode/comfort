@@ -118,7 +118,6 @@ export default function ProfileContent({
             <p>
               <strong>Total Bookings:</strong> {lodger?.bookings?.length ?? 0}
             </p>
-            {/* Add more booking-related information here */}
           </CardContent>
         </Card>
         <Card>
