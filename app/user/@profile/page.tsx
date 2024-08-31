@@ -23,19 +23,6 @@ export default function ProfilePage() {
           profileImageUrl: user.imageUrl,
         };
 
-        // Fetch or create user in the database via API route
-        const response = await fetch('/api/user', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(userData),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch or create user');
-        }
-
-        const dbUser = await response.json();
-
         // Fetch Hygraph data
         const hygraphLodger = await getUserByClerkId(
           user.id,
@@ -43,18 +30,18 @@ export default function ProfilePage() {
           userData.name,
         );
 
-        setLodger({ ...dbUser, ...hygraphLodger });
+        setLodger({ ...userData, ...hygraphLodger });
 
         toast({
-          title: 'Profile Updated',
-          description: 'Your profile has been successfully updated.',
+          title: 'Profile Loaded',
+          description: 'Your profile has been successfully loaded.',
           variant: 'default',
         });
       } catch (error) {
         console.error('Error fetching user data:', error);
         toast({
           title: 'Error',
-          description: 'There was an error updating your profile. Please try again.',
+          description: 'There was an error loading your profile. Please try again.',
           variant: 'destructive',
         });
       }
@@ -69,6 +56,15 @@ export default function ProfilePage() {
 
   // Render your profile content here using the `lodger` state
   return (
-    // Your JSX here
+    <div>
+      <h1>Profile</h1>
+      {lodger && (
+        <div>
+          <p>Name: {lodger.name}</p>
+          <p>Email: {lodger.email}</p>
+          {/* Add more profile information as needed */}
+        </div>
+      )}
+    </div>
   );
 }

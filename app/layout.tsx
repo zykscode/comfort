@@ -9,6 +9,7 @@ import Main from '@/components/main';
 import { MenuProvider } from '@/components/MenuContext';
 import { ThemeProvider } from '@/components/theme-provider';
 import DropdownMenu from '@/components/ui/dropdown';
+import { Toaster } from '@/components/ui/toaster';
 import siteMetadata from '@/data/siteMetadata';
 import { cn, WhyteInktrap } from '@/lib/utils';
 
@@ -122,6 +123,7 @@ export default function RootLayout({
                 </div>
                 <Footer />
               </section>
+              <Toaster />
             </MenuProvider>
           </ClerkProvider>
         </ThemeProvider>

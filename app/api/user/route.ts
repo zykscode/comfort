@@ -1,18 +1,32 @@
+import { currentUser } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
 import { prisma } from '@/lib/db';
 
-export async function POST(req: Request) {
-  try {
-    const { id, email, name } = await req.json();
+export async function GET() {
+  const user = await currentUser();
 
-    const user = await prisma.user.upsert({
-      where: { clerkId: id },
-      update: { email, name },
-      create: { clerkId: id, email, name },
+  if (!user?.id) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    const lodger = await prisma.user.findUnique({
+      where: { clerkId: user.id },
+      include: { bookings: true },
     });
 
-    return NextResponse.json(user);
+    if (!lodger) {
+      // If user doesn't exist in the database, return Clerk user data
+      return NextResponse.json({
+        clerkId: user.id,
+        email: user.emailAddresses[0]?.emailAddress,
+        name: `${user.firstName} ${user.lastName}`.trim(),
+        bookings: [],
+      });
+    }
+
+    return NextResponse.json(lodger);
   } catch (error) {
     console.error('Error in user API route:', error);
     return NextResponse.json(
