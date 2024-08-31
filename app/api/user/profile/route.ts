@@ -1,23 +1,32 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
 
+import { prisma } from '@/lib/db'; // Assuming you have a Prisma client setup
+
 export async function GET() {
   try {
-    const user = await currentUser();
+    const clerkUser = await currentUser();
 
-    if (!user) {
+    if (!clerkUser) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const userData = {
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      emailAddress: user.emailAddresses[0]?.emailAddress,
-      imageUrl: user.imageUrl,
-    };
+    const user = await prisma.user.findUnique({
+      where: { clerkId: clerkUser.id },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        profileImageUrl: true,
+        // ... other fields
+      },
+    });
 
-    return NextResponse.json(userData);
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(user);
   } catch (error) {
     console.error('Error fetching user data:', error);
     return NextResponse.json(

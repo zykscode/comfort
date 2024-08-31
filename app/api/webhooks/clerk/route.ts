@@ -78,7 +78,10 @@ export async function POST(req: Request) {
     } catch (error) {
       console.error('Error upserting user:', error);
       return NextResponse.json(
-        { error: 'Error saving user data', details: error.message },
+        {
+          error: 'Error saving user data',
+          details: error instanceof Error ? error.message : String(error),
+        },
         { status: 500 },
       );
     }
