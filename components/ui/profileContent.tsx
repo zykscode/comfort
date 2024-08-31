@@ -15,6 +15,7 @@ interface ProfileContentProps {
     email: string;
     name: string;
     profileImageUrl: string;
+    isAdmin: boolean; // Add this line
   };
   lodger: {
     clerkId: string;
@@ -26,6 +27,7 @@ interface ProfileContentProps {
     };
     preference: string;
     bookings: any[];
+    isAdmin: boolean; // Add this line
   } | null;
   error?: boolean;
 }
@@ -104,8 +106,7 @@ export default function ProfileContent({
               <strong>Preferences:</strong> {lodger?.preference ?? ''}
             </p>
             <p>
-              <strong>Admin Status:</strong>{' '}
-              {lodger?.isAdmin || user.isAdmin ? 'Admin' : 'User'}
+              <strong>Admin Status:</strong> {user.isAdmin ? 'Admin' : 'User'}
             </p>
           </CardContent>
         </Card>
