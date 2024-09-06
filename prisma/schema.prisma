@@ -9,16 +9,17 @@ generator client {
 }
 
 model User {
-  id              String    @id @default(uuid())
-  clerkId         String    @unique // Clerk ID is the primary key and unique
-  email           String    @unique
+  id              String        @id @default(uuid())
+  clerkId         String        @unique // Clerk ID is the primary key and unique
+  email           String        @unique
   name            String?
   profileImageUrl String? // Make sure this line is present
   bookings        Booking[]
   payments        Payment[]
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-  isAdmin         Boolean   @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  testimonials    Testimonial[]
+  isAdmin         Boolean       @default(false)
 }
 
 model Booking {
@@ -61,4 +62,13 @@ enum PaymentStatus {
   pending
   completed
   failed
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  text      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
