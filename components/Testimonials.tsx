@@ -1,6 +1,4 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+import { getTestimonials } from '@/app/api/testimonials';
 
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Card, CardContent } from './ui/card';
@@ -12,25 +10,8 @@ interface Testimonial {
   text: string;
 }
 
-const Testimonials = () => {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-
-  useEffect(() => {
-    async function fetchTestimonials() {
-      try {
-        const response = await fetch('/api/testimonials');
-        if (!response.ok) {
-          throw new Error('Failed to fetch testimonials');
-        }
-        const data = await response.json();
-        setTestimonials(data);
-      } catch (error) {
-        console.error('Error fetching testimonials:', error);
-      }
-    }
-
-    fetchTestimonials();
-  }, []);
+export default async function Testimonials() {
+  const testimonials = await getTestimonials();
 
   return (
     <section className="w-full py-12 md:py-24 bg-white">
@@ -39,7 +20,7 @@ const Testimonials = () => {
           What Our Customers Say
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial) => (
+          {testimonials.map((testimonial: Testimonial) => (
             <Card key={testimonial.id}>
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
@@ -64,6 +45,4 @@ const Testimonials = () => {
       </div>
     </section>
   );
-};
-
-export default Testimonials;
+}

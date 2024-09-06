@@ -1,9 +1,11 @@
 export async function getTestimonials() {
-  const response = await fetch('/api/testimonials');
-  if (!response.ok) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/testimonials`,
+  );
+  if (!res.ok) {
     throw new Error('Failed to fetch testimonials');
   }
-  return response.json();
+  return res.json();
 }
 
 export async function submitTestimonial(text: string) {
