@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { Button } from './ui/button';
 // import { DatePickerWithRange } from './ui/date-range-picker';
 import { Input } from './ui/input';
@@ -15,11 +13,6 @@ import {
 } from './ui/select';
 
 const SearchSection = () => {
-  const [dateRange, setDateRange] = useState({
-    from: new Date(),
-    to: new Date(),
-  });
-
   return (
     <section className="w-full py-12 bg-white">
       <div className="container mx-auto px-4">
